@@ -80,12 +80,14 @@ public class RageComicListFragment extends Fragment {
             mLayoutInflater = LayoutInflater.from(context);
         }
 
+        // inflate a view in a list
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
             return new ViewHolder(mLayoutInflater
                     .inflate(R.layout.recycler_item_rage_comic, viewGroup, false));
         }
 
+        // set content for a view
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, final int position) {
             final int imageResId = mImageResIds[position];

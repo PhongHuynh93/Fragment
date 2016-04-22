@@ -1,9 +1,9 @@
 package dhbk.android.fragment;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RageComicListFragment.OnRageComicSelected{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,5 +17,17 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.root_layout, RageComicListFragment.newInstance(), "rageComicList")
                     .commit();
         }
+    }
+
+    @Override
+    public void onRageComicSelected(int imageResId, String name, String description, String url) {
+//        Toast.makeText(MainActivity.this, "You selected " + name, Toast.LENGTH_SHORT).show();
+        final RageComicDetailsFragment detailsFragment =
+                RageComicDetailsFragment.newInstance(imageResId, name, description, url);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.root_layout, detailsFragment, "rageComicDetails")
+                .addToBackStack(null)
+                .commit();
     }
 }
