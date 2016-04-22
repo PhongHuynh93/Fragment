@@ -94,7 +94,12 @@ public class RageComicListFragment extends Fragment {
             final String url = mUrls[position];
             viewHolder.setData(imageResId, name);
 
-            
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onRageComicSelected(imageResId, name, description, url);
+                }
+            });
         }
 
         @Override
