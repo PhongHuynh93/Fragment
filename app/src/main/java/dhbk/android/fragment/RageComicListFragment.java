@@ -2,6 +2,8 @@ package dhbk.android.fragment;
 
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,6 +25,27 @@ public class RageComicListFragment extends Fragment {
 
     public RageComicListFragment() {
         // Required empty public constructor
+    }
+
+    // access the resource
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        // Get rage face names and descriptions.
+        final Resources resources = context.getResources();
+        mNames = resources.getStringArray(R.array.names);
+        mDescriptions = resources.getStringArray(R.array.descriptions);
+        mUrls = resources.getStringArray(R.array.urls);
+
+        // Get rage face images.
+        final TypedArray typedArray = resources.obtainTypedArray(R.array.images);
+        final int imageCount = mNames.length;
+        mImageResIds = new int[imageCount];
+        for (int i = 0; i < imageCount; i++) {
+            mImageResIds[i] = typedArray.getResourceId(i, 0);
+        }
+        typedArray.recycle();
     }
 
     class RageComicAdapter extends RecyclerView.Adapter<ViewHolder> {
@@ -72,4 +95,6 @@ public class RageComicListFragment extends Fragment {
             mNameTextView.setText(name);
         }
     }
+
+
 }

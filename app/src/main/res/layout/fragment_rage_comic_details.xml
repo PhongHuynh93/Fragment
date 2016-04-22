@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
             android:layout_marginTop="@dimen/rage_comic_name_margin_top"
-            tools:text="Freddie Mercury"/>
+            android:text="Freddie Mercury" />
 
         <ImageView
             android:id="@+id/comic_image"
@@ -63,7 +63,7 @@
             android:layout_marginRight="@dimen/rage_comic_description_margin_right"
             android:layout_marginTop="0dp"
             android:autoLink="web"
-            tools:text="Freddie Mercury Rage Pose is a rage comic character made from a photo of deceased British musician and former lead vocalist for the rock band Queen Freddie Mercury. The image is typically used to indicate that an extraordinary feat has been accomplished, similar to the F!@# Yea illustration."/>
+            android:text="Freddie Mercury Rage Pose is a rage comic character made from a photo of deceased British musician and former lead vocalist for the rock band Queen Freddie Mercury. The image is typically used to indicate that an extraordinary feat has been accomplished, similar to the F!@# Yea illustration."/>
 
     </LinearLayout>
 
