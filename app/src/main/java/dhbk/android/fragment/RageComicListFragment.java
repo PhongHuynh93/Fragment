@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class RageComicListFragment extends Fragment {
+    private OnRageComicSelected mListener;
 
     private int[] mImageResIds;
     private String[] mNames;
@@ -31,10 +32,16 @@ public class RageComicListFragment extends Fragment {
         // Required empty public constructor
     }
 
-    // access the resource
+    // access the resource, make activity implement listener
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+        if (context instanceof OnRageComicSelected) {
+            mListener = (OnRageComicSelected) context;
+        } else {
+            throw new ClassCastException(context.toString() + " must implement OnRageComicSelected.");
+        }
 
         // Get rage face names and descriptions.
         final Resources resources = context.getResources();
@@ -52,6 +59,7 @@ public class RageComicListFragment extends Fragment {
         typedArray.recycle();
     }
 
+    // make layout
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -85,6 +93,8 @@ public class RageComicListFragment extends Fragment {
             final String description = mDescriptions[position];
             final String url = mUrls[position];
             viewHolder.setData(imageResId, name);
+
+            
         }
 
         @Override
@@ -110,6 +120,11 @@ public class RageComicListFragment extends Fragment {
             mImageView.setImageResource(imageResId);
             mNameTextView.setText(name);
         }
+    }
+
+    // needed so that fragment can talk to each other via activity.
+    public interface OnRageComicSelected {
+        void onRageComicSelected(int imageResId, String name, String description, String url);
     }
 
 
