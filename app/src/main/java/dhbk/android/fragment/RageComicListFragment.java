@@ -1,10 +1,14 @@
 package dhbk.android.fragment;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +50,18 @@ public class RageComicListFragment extends Fragment {
             mImageResIds[i] = typedArray.getResourceId(i, 0);
         }
         typedArray.recycle();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.fragment_rage_comic_list, container, false);
+
+        final Activity activity = getActivity();
+        final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new GridLayoutManager(activity, 2));
+        recyclerView.setAdapter(new RageComicAdapter(activity));
+        return view;
     }
 
     class RageComicAdapter extends RecyclerView.Adapter<ViewHolder> {
