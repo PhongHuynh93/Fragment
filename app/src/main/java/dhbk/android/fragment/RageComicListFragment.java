@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,17 +25,24 @@ public class RageComicListFragment extends Fragment {
     private String[] mDescriptions;
     private String[] mUrls;
 
+    public static final String TAG = RageComicListFragment.class.getName();
+
     public static RageComicListFragment newInstance() {
+        Log.i(TAG, MainActivity.LIFE_CYCLE + "newInstance: ");
         return new RageComicListFragment();
     }
 
     public RageComicListFragment() {
+        Log.i(TAG, MainActivity.LIFE_CYCLE + "RageComicListFragment: ");
+
         // Required empty public constructor
     }
 
     // access the resource, make activity implement listener
     @Override
     public void onAttach(Context context) {
+        Log.i(TAG, MainActivity.LIFE_CYCLE + "onAttach: ");
+
         super.onAttach(context);
 
         if (context instanceof OnRageComicSelected) {
@@ -63,6 +71,8 @@ public class RageComicListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.i(TAG, MainActivity.LIFE_CYCLE + "onCreateView: ");
+
         final View view = inflater.inflate(R.layout.fragment_rage_comic_list, container, false);
 
         final Activity activity = getActivity();
@@ -77,12 +87,16 @@ public class RageComicListFragment extends Fragment {
         private LayoutInflater mLayoutInflater;
 
         public RageComicAdapter(Context context) {
+            Log.i(TAG, MainActivity.LIFE_CYCLE + "RageComicAdapter: ");
+
             mLayoutInflater = LayoutInflater.from(context);
         }
 
         // inflate a view in a list
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+            Log.i(TAG, MainActivity.LIFE_CYCLE + "onCreateViewHolder: ");
+
             return new ViewHolder(mLayoutInflater
                     .inflate(R.layout.recycler_item_rage_comic, viewGroup, false));
         }
@@ -90,6 +104,8 @@ public class RageComicListFragment extends Fragment {
         // set content for a view
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+            Log.i(TAG, MainActivity.LIFE_CYCLE + "onBindViewHolder: ");
+
             final int imageResId = mImageResIds[position];
             final String name = mNames[position];
             final String description = mDescriptions[position];
@@ -106,6 +122,8 @@ public class RageComicListFragment extends Fragment {
 
         @Override
         public int getItemCount() {
+            Log.i(TAG, MainActivity.LIFE_CYCLE + "getItemCount: ");
+
             return mNames.length;
         }
     }
@@ -117,6 +135,8 @@ public class RageComicListFragment extends Fragment {
 
         private ViewHolder(View itemView) {
             super(itemView);
+            Log.i(TAG, MainActivity.LIFE_CYCLE + "ViewHolder: ");
+
 
             // Get references to image and name.
             mImageView = (ImageView) itemView.findViewById(R.id.comic_image);
@@ -124,6 +144,8 @@ public class RageComicListFragment extends Fragment {
         }
 
         private void setData(int imageResId, String name) {
+            Log.i(TAG, MainActivity.LIFE_CYCLE + "setData: ");
+
             mImageView.setImageResource(imageResId);
             mNameTextView.setText(name);
         }
@@ -134,5 +156,38 @@ public class RageComicListFragment extends Fragment {
         void onRageComicSelected(int imageResId, String name, String description, String url);
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i(TAG, MainActivity.LIFE_CYCLE + "onPause: ");
 
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i(TAG, MainActivity.LIFE_CYCLE + "onStop: ");
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.i(TAG, MainActivity.LIFE_CYCLE + "onDestroyView: ");
+
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.i(TAG, MainActivity.LIFE_CYCLE + "onDestroy: ");
+
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDetach() {
+        Log.i(TAG, MainActivity.LIFE_CYCLE + "onDetach: ");
+
+        super.onDetach();
+    }
 }
